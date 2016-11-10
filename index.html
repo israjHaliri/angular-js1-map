@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/backend/jquery.gritter.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/backend/pace-theme-minimal.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/backend/main.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/backend/skins.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/backend/jquery.gritter.css"/>
+</head>
+<body class="skin-dark" ng-app="myApp">
+{{is_logged_in}}
+<header ng-if="is_logged_in == 0" class="header" id="#head-nav-backend">
+  <span href="index.html" class="logo">
+    <big>DASHBOARD</big>
+  </span>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars fa-lg"></span>
+        </a>
+        <div class="navbar-right">
+            <ul class="nav navbar-nav">
+                <li class="dropdown profile-menu">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-cog fa-lg"></i>
+                        <span class="username">Me</span>
+                        <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu box profile">
+                        <li>
+                            <div class="up-arrow"></div>
+                        </li>
+                        <li>
+                            <a href="logout"><i class="fa fa-power-off"></i>Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="wrapper row-offcanvas row-offcanvas-left">
+    <aside class="left-side sidebar-offcanvas">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="image" align="center">
+                    <img src="assets/images/logopln.jpg" class="img-circle" alt="User Image" style="height:75px;width:75px;">
+                </div>
+                <div align="center" style="margin-top:15px;color: white;">
+                    <span>Administrator</span>
+                </div>
+            </div>
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="#dashboard">
+                        <i class="fa fa-home"></i><span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#show_map">
+                        <i class="fa fa-map-marker"></i><span>Show Map</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="#manage_map">
+                        <i class="fa fa-map-marker"></i><span>Manage Map</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+    <aside class="right-side">
+        <section class="content">
+            <div class="row">
+                <div col-md-12 style="padding:15px;" ng-view></div>
+            </div>
+        </section>
+    </aside>
+</div>
+
+</body>
+<script type="text/javascript" src="assets/js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="assets/js/angular.min.js"></script>
+<script type="text/javascript" src="assets/js/angular-route.min.js"></script>
+<script type="text/javascript" src="assets/js/leaflet.js"></script>
+<script type="text/javascript" src="assets/js/angular-leaflet-directive.min.js"></script>
+<script type="text/javascript" src="assets/js/dirPagination.js"></script>
+<script type="text/javascript" src="assets/js/backend/pace.min.js"></script>
+<script type="text/javascript" src="assets/js/backend/jquery.totemticker.min.js"></script>
+<script type="text/javascript" src="assets/js/backend/jquery.ba-resize.min.js"></script>
+<script type="text/javascript" src="assets/js/backend/jquery.blockUI.min.js"></script>
+<script type="text/javascript" src="assets/js/backend/jquery.gritter.min.js"></script>
+<script type="text/javascript" src="assets/js/backend/jquery.sparkline.min.js"></script>
+<script type="text/javascript" src="assets/js/backend/main.js"></script>
+
+<script type="text/javascript" src="assets/js/app/app.js"></script>
+
+<script type="text/javascript" src="assets/js/app/service/auth-Interceptor-service.js"></script>
+<script type="text/javascript" src="assets/js/app/service/auth-service.js"></script>
+
+<script type="text/javascript" src="assets/js/app/controller/login-controller.js"></script>
+<script type="text/javascript" src="assets/js/app/controller/dashboard-controller.js"></script>
+<script type="text/javascript" src="assets/js/app/controller/show-map-controller.js"></script>
+<script type="text/javascript" src="assets/js/app/controller/manage-map-controller.js"></script>
+
+</html>
