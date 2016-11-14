@@ -5,8 +5,6 @@ app.controller('dashboardController', function($scope, $http, $location, $routeP
 
     var getCookieAuth = $cookies.get("mapinfo-auth-cookies");
 
-    console.log("get cookie auth = ",getCookieAuth);
-
     $scope.initData = function(){
         $http({
             url: baseUrl+"/api/dashboard",

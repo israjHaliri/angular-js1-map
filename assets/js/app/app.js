@@ -9,15 +9,16 @@ app.config(['$routeProvider', function ($routeProvider) {
 	.when('/manage_map', {templateUrl: 'pages/manage-map.html',controller: 'manageMapController'})
 	.otherwise({redirectTo: '/'});
 
-}]).service('authInterceptor', function($q) {
+}]).service('authInterceptor', function($log) {
     var service = this;
 
-    service.responseError = function(response) {
-    	console.log(response);
+    service.response = function(response) {
+    	console.log(response.status);
+   
         if (response.status == 401){
             window.location = "/";
         }
-        return $q.reject(response);
+        return response;
     };
 })
 .config(['$httpProvider', function($httpProvider) {
@@ -32,6 +33,5 @@ app.run(function($rootScope,$location,$cookies) {
 	};
 
 	var getCookieAuth = $cookies.get("mapinfo-auth-cookies");
-	console.log(getCookieAuth);
 	$rootScope.isLoggedIn = getCookieAuth;
 })

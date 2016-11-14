@@ -1,7 +1,6 @@
 app.controller('loginController', function($scope,$http,$location,$cookies) {
 
 	var getCookieAuth = $cookies.get("mapinfo-auth-cookies");
-	console.log(getCookieAuth);
 
 	if (typeof(getCookieAuth) != 'undefined') {
 		$location.path("/dashboard");	
