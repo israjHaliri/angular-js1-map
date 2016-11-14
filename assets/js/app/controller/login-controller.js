@@ -1,31 +1,34 @@
-app.controller('loginController', function($scope,$http) {
+app.controller('loginController', function($scope,$http,$location,$cookies) {
 
-   // $scope.credentials = {
-   //    username: 'jono',
-   //    password: '123'
-   // };
+	var getCookieAuth = $cookies.get("mapinfo-auth-cookies");
+	console.log(getCookieAuth);
 
-   // $scope.submit= function () {
-   //    authService.login(credentials).then(function (user) {
-   //       alert(user);
-   //    });
-   //
-   // };
+	if (typeof(getCookieAuth) != 'undefined') {
+		$location.path("/dashboard");	
+	}
 
-   var getUrl = window.location;
-   var baseUrl = getUrl .protocol + "//" + getUrl.host;
+	$scope.login = function(){
 
+		$http({
+			url: baseUrl+"/api/user_info",
+			method: 'POST',
+			data: $.param({username: $scope.username}),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				"Authorization" :"Basic " + authenticateUser($scope.username,$scope.password)
+			}
 
-   $scope.submit= function () {
+		}).success(function (response) {
 
-      $http.post(baseUrl+'/login', {
-         'username' : $scope.username,
-         'password' : $scope.password
-      }).success(function (response){
-         console.log("response login false =",response);
-      }, function myError(response) {
-         console.log("response login failed =",response);
-      });
-   };
+			var cookie_auth = authenticateUser($scope.username,$scope.password);
+			$cookies.put('mapinfo-auth-cookies', cookie_auth); 
+			if (getCookieAuth != null || getCookieAuth != "") {
+				$location.path("/dashboard");
+			}
 
+		}, function myError(response) {
+			console.log("load error response =", response);
+		});
+
+	};
 });

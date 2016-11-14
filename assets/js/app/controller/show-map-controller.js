@@ -1,7 +1,6 @@
-app.controller('showMapController', ['$scope', '$http', function ($scope, $http) {
+app.controller('showMapController', ['$scope', '$http', '$cookies', function ($scope, $http, $cookies) {
 
-    // angular.element(document).ready(function () {
-    // });
+    var getCookieAuth = $cookies.get("mapinfo-auth-cookies");
 
     $scope.centerMap = {
         lat: 40.095,
@@ -17,16 +16,16 @@ app.controller('showMapController', ['$scope', '$http', function ($scope, $http)
 
     $scope.initData = function(){
         $http({
-            url: "http://localhost:8181/api/coordinate",
+            url: baseUrl+"/api/coordinate",
             dataType: 'json',
             method: 'GET',
             data: '',
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization" :"Basic " + getCookieAuth
             }
 
         }).success(function (response) {
-            console.log("load response =", response);
 
             for (var i = 0; i < response.list_data.length; i++) {
                 $scope.dataMarker.push({
@@ -40,8 +39,6 @@ app.controller('showMapController', ['$scope', '$http', function ($scope, $http)
         }, function myError(response) {
             console.log("load error response =", response);
         });
-
-        console.log($scope.dataMarker);
     };
 
     $scope.initData();
